@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Shell;
 
 namespace Taskify.App.Views
 {
@@ -10,6 +11,18 @@ namespace Taskify.App.Views
         public MainWindow()
         {
             InitializeComponent();
+            InitializeWindowChrome();
+        }
+
+        private void InitializeWindowChrome()
+        {
+            WindowChrome windowChrome = new WindowChrome
+            {
+                CornerRadius = new CornerRadius(10), // Adjust the corner radius as needed
+                GlassFrameThickness = new Thickness(0),
+                NonClientFrameEdges = NonClientFrameEdges.None
+            };
+            WindowChrome.SetWindowChrome(this, windowChrome);
         }
     }
 }

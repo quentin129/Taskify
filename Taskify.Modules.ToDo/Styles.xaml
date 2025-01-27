@@ -111,6 +111,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
                     <Border Background="#E9EFEC"
+                            BorderBrush="Black"
+                            BorderThickness="1"
                             CornerRadius="4">
                         <StackPanel IsItemsHost="True" />
                     </Border>
@@ -120,5 +122,47 @@
     </Style>
 
     <!-- MenuItem Style -->
-    
+
+
+    <!-- ScrollViewer Style -->
+    <!--<Style TargetType="ScrollViewer">
+        <Style.Resources>
+            --><!-- Style for the vertical scrollbar --><!--
+            <Style TargetType="ScrollBar"
+                   x:Key="VerticalScrollbar">
+                <Setter Property="Background"
+                        Value="#D8E9E3" />
+                <Setter Property="Width"
+                        Value="8" />
+                <Setter Property="Margin"
+                        Value="0,0,0,0" />
+            </Style>
+        </Style.Resources>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollViewer">
+                    <Grid>
+                        --><!-- Main content area that can be scrolled --><!--
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollContentPresenter HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch" />
+                        </Border>
+
+                        --><!-- Vertical scrollbar --><!--
+                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                   Orientation="Vertical"
+                                   Width="8"
+                                   Background="#D8E9E3"
+                                   Style="{StaticResource VerticalScrollbar}"
+                                   Visibility="Collapsed" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+
+
+
 </ResourceDictionary>

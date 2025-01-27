@@ -3,18 +3,62 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}"
+        AllowsTransparency="True"
+        Background="#E9EFEC"
         Height="1080"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Width="1920">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <Button Content="TestNavButton" Height="100"/>
+        <Border Background="#16423C"
+                Grid.ColumnSpan="2">
+            <Label Content="// Taskify"
+                   FontWeight="Bold"
+                   FontFamily="Roboto"
+                   Margin="20 0 0 0"
+                   Foreground="#C4DAD2"
+                   VerticalAlignment="Center"
+                   FontSize="24"></Label>
+        </Border>
 
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" Grid.Column="1" Margin="55"/>
+        <StackPanel Orientation="Vertical"
+                    Background="#C4DAD2"
+                    Grid.Row="1">
+            <Button Content="ToDo"
+                    Margin="25 40 0 0"
+                    Command="{Binding ChangePageCommand}"
+                    CommandParameter="{Binding }"
+                    Style="{StaticResource NavBarButton}" />
+            <Button Content="Today"
+                    Style="{StaticResource NavBarButton}"
+                    Command="{Binding ChangePageCommand}"
+                    CommandParameter="{Binding }" />
+            <Button Content="Projects"
+                    Style="{StaticResource NavBarButton}"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="TestView" />
+            <Button Content="Notes"
+                    Style="{StaticResource NavBarButton}"
+                    Command="{Binding ChangePageCommand}"
+                    CommandParameter="{Binding }" />
+        </StackPanel>
+        <Border Background="#bcbcbc"
+                Width="1"
+                Grid.Row="1"
+                HorizontalAlignment="Right"
+                Margin="0 0 1 0" />
+        <ContentControl prism:RegionManager.RegionName="ContentRegion"
+                        Grid.Column="1"
+                        Grid.Row="1" />
+        <!--Margin="55"-->
     </Grid>
 </Window>

@@ -16,19 +16,24 @@
             <local:TaskItemView />
         </DataTemplate>
     </UserControl.Resources>
-    <StackPanel>
+    <Grid>
         <TextBlock Text="Task List"
                    FontWeight="Bold"
                    FontSize="16" />
-        <Button x:Name="btnAddTask"
+        <Button x:Name="btnAddTask" Height="20"
+                Panel.ZIndex="4"
+                VerticalAlignment="Top"
                 Command="{Binding AddTaskCommand}"
                 Content="AddTask" />
         <ListBox ItemsSource="{Binding TaskItems}"
                  BorderThickness="0"
+                 Margin="55"
+                 Background="Transparent"
                  dd:DragDrop.IsDragSource="True"
                  dd:DragDrop.IsDropTarget="True"
                  behaviors:ClearSelectionBehavior.ClearSelectionOnClickOutside="True"
                  HorizontalContentAlignment="Stretch"
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden"
                  ItemTemplate="{StaticResource TaskItemTemplate}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
@@ -40,6 +45,7 @@
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         Padding="1"
+                                        Margin="0 2.5"
                                         CornerRadius="4">
                                     <ContentPresenter VerticalAlignment="Center"
                                                       HorizontalAlignment="Stretch" />
@@ -89,5 +95,5 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
-    </StackPanel>
+    </Grid>
 </UserControl>
