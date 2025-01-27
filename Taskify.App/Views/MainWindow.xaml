@@ -1,0 +1,20 @@
+﻿<Window x:Class="Taskify.App.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}"
+        Height="1080"
+        WindowStartupLocation="CenterScreen"
+        Width="1920">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Button Content="TestNavButton" Height="100"/>
+
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" Grid.Column="1" Margin="55"/>
+    </Grid>
+</Window>

@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{90D73450-5A2C-4DFE-B7E5-52B353645E58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskify.Modules.ToDo", "Taskify.Modules.ToDo\Taskify.Modules.ToDo.csproj", "{69BD3FD1-EEC2-4525-9855-F63F51B329E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskify.App", "Taskify.App\Taskify.App.csproj", "{335BB099-4D9B-4F08-8195-F61A45E5AD38}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69BD3FD1-EEC2-4525-9855-F63F51B329E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69BD3FD1-EEC2-4525-9855-F63F51B329E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69BD3FD1-EEC2-4525-9855-F63F51B329E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69BD3FD1-EEC2-4525-9855-F63F51B329E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{335BB099-4D9B-4F08-8195-F61A45E5AD38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335BB099-4D9B-4F08-8195-F61A45E5AD38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335BB099-4D9B-4F08-8195-F61A45E5AD38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335BB099-4D9B-4F08-8195-F61A45E5AD38}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69BD3FD1-EEC2-4525-9855-F63F51B329E4} = {90D73450-5A2C-4DFE-B7E5-52B353645E58}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="Taskify.Modules.ToDo.Views.TaskListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Taskify.Modules.ToDo.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:dd="urn:gong-wpf-dragdrop"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="TaskItemTemplate">
+            <local:TaskItemView />
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="Task List"
+                   FontWeight="Bold"
+                   FontSize="16" />
+        <Button x:Name="btnAddTask"
+                Command="{Binding AddTaskCommand}"
+                Content="AddTask" />
+        <ListBox ItemsSource="{Binding TaskItems}"
+                 BorderThickness="0"
+                 dd:DragDrop.IsDragSource="True"
+                 dd:DragDrop.IsDropTarget="True"
+                 HorizontalContentAlignment="Stretch"
+                 ItemTemplate="{StaticResource TaskItemTemplate}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border Name="Border"
+                                        Background="{TemplateBinding Background}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        Padding="1"
+                                        CornerRadius="4">
+                                    <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Stretch" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <!-- Trigger für IsSelected -->
+                                    <Trigger Property="IsSelected"
+                                             Value="True">
+                                        <Setter TargetName="Border"
+                                                Property="Background"
+                                                Value="#A8C3B8" />
+                                        <!-- Deine Farbe -->
+                                        <Setter TargetName="Border"
+                                                Property="BorderBrush"
+                                                Value="#16423C" />
+                                    </Trigger>
+                                    <!-- Trigger für MouseOver -->
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter TargetName="Border"
+                                                Property="Background"
+                                                Value="#D8E9E3" />
+                                        <!-- Hover-Farbe -->
+                                        <Setter TargetName="Border"
+                                                Property="BorderBrush"
+                                                Value="#16423C" />
+                                    </Trigger>
+                                    <!-- Optional: Standardzustand -->
+                                    <Trigger Property="IsSelected"
+                                             Value="False">
+                                        <Setter TargetName="Border"
+                                                Property="Background"
+                                                Value="Transparent" />
+                                        <Setter TargetName="Border"
+                                                Property="BorderBrush"
+                                                Value="Transparent" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <!-- Standardwerte für Hintergrund und Rahmen -->
+                    <Setter Property="Background"
+                            Value="Transparent" />
+                    <Setter Property="BorderBrush"
+                            Value="Transparent" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </StackPanel>
+</UserControl>

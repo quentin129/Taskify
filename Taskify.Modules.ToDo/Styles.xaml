@@ -1,0 +1,108 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--CheckboxStyle ToDoItem-->
+    <Style TargetType="CheckBox"
+           x:Key="ToDoItemCheckBoxStyle">
+        <!-- Template for the CheckBox (Structure) -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid>
+                        <Border x:Name="Border"
+                                Background="#E9EFEC"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0.75"
+                                CornerRadius="3">
+                            <Grid>
+                                <iconPacks:PackIconBootstrapIcons Kind="CheckLg"
+                                                                  Name="icoCheckMark"
+                                                                  HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"
+                                                                  Foreground="#6A9C89"
+                                                                  Margin="2.5"
+                                                                  Visibility="Hidden"
+                                                                  BorderThickness="0" />
+                            </Grid>
+                        </Border>
+                        <!--<ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" />-->
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Setter Property="Visibility"
+                                    Value="Visible"
+                                    TargetName="icoCheckMark" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--ButtonStyle ToDoItem-->
+    <Style TargetType="Button"
+           x:Key="ToDoItemEditButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Viewbox>
+                        <Border x:Name="_border"
+                                Margin="0 10"
+                                Background="Transparent">
+                            <Path Data="M21,12a1,1,0,0,0-1,1v6a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4h6a1,1,0,0,0,0-2H5A3,3,0,0,0,2,5V19a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V13A1,1,0,0,0,21,12ZM6,12.76V17a1,1,0,0,0,1,1h4.24a1,1,0,0,0,.71-.29l6.92-6.93h0L21.71,8a1,1,0,0,0,0-1.42L17.47,2.29a1,1,0,0,0-1.42,0L13.23,5.12h0L6.29,12.05A1,1,0,0,0,6,12.76ZM16.76,4.41l2.83,2.83L18.17,8.66,15.34,5.83ZM8,13.17l5.93-5.93,2.83,2.83L10.83,16H8Z"
+                                  Fill="{TemplateBinding Foreground}"
+                                  HorizontalAlignment="Center"
+                                  Name="_path"
+                                  VerticalAlignment="Center" />
+                        </Border>
+                    </Viewbox>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="_border"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="_path"
+                                    Property="Fill"
+                                    Value="#6A9C89" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button"
+           x:Key="ToDoItemRemoveButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Viewbox>
+                        <Border x:Name="_border"
+                                Margin="0 10"
+                                Background="Transparent">
+                            <Path Data="M 1 18 A 2 2 0 0 0 3 20 H 11 A 2 2 0 0 0 13 18 V 6 H 1 V 18 M 3 8 H 11 V 18 H 3 V 8 M 10.5 3 L 9.5 2 H 4.5 L 3.5 3 H 0 V 5 H 14 V 3 H 10.5 Z"
+                                  Fill="{TemplateBinding Foreground}"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Name="_path" />
+                        </Border>
+                    </Viewbox>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="_border"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="_path"
+                                    Property="Fill"
+                                    Value="#6A9C89" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
