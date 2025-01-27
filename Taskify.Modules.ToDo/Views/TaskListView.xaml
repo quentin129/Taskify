@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:behaviors="clr-namespace:Taskify.Modules.ToDo.Behaviors"
              xmlns:local="clr-namespace:Taskify.Modules.ToDo.Views"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:dd="urn:gong-wpf-dragdrop"
@@ -26,6 +27,7 @@
                  BorderThickness="0"
                  dd:DragDrop.IsDragSource="True"
                  dd:DragDrop.IsDropTarget="True"
+                 behaviors:ClearSelectionBehavior.ClearSelectionOnClickOutside="True"
                  HorizontalContentAlignment="Stretch"
                  ItemTemplate="{StaticResource TaskItemTemplate}">
             <ListBox.ItemContainerStyle>

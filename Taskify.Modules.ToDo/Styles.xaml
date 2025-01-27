@@ -105,4 +105,20 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="ContextMenu">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContextMenu">
+                    <Border Background="#E9EFEC"
+                            CornerRadius="4">
+                        <StackPanel IsItemsHost="True" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- MenuItem Style -->
+    
 </ResourceDictionary>

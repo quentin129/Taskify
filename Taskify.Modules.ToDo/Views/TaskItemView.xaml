@@ -16,6 +16,12 @@
 
     <Border Background="#C4DAD2"
             CornerRadius="8">
+        <Border.ContextMenu>
+            <ContextMenu>
+                <MenuItem Header="Test 1"></MenuItem>
+                <MenuItem Header="Test 2"></MenuItem>
+            </ContextMenu>
+        </Border.ContextMenu>
         <Border.Style>
             <Style TargetType="Border">
                 <Setter Property="Background"
