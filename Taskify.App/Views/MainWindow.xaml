@@ -12,8 +12,9 @@
         Width="1920">
 
     <Window.InputBindings>
-        <KeyBinding Key="F4"
-                    Command="{Binding WindowClosingCommand}" />
+        <KeyBinding Key="S"
+                    Modifiers="Control"
+                    Command="{Binding SaveCommand}" />
     </Window.InputBindings>
 
     <Grid>

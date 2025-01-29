@@ -19,6 +19,10 @@ namespace Taskify.App.ViewModels
         public DelegateCommand WindowClosingCommand =>
             _windowClosingCommand ??= new DelegateCommand(OnWindowClosing);
 
+        private DelegateCommand _saveCommand;
+        public DelegateCommand SaveCommand =>
+            _saveCommand ??= new DelegateCommand(SaveShell);
+
         public MainWindowViewModel(IRegionManager regionManager)
         {
             regionManager.RequestNavigate("ContentRegion", nameof(Taskify.Modules.ToDo.Views.TaskListView));
@@ -27,6 +31,11 @@ namespace Taskify.App.ViewModels
         private void OnWindowClosing()
         {
             // Publish Event um im TaskListViewModel das speichern anzustoßen
+        }
+
+        private void SaveShell()
+        {
+            // Publish Events Content zu saven
         }
     }
 }
