@@ -3,8 +3,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text.Json;
 using Taskify.Modules.ToDo.Models;
+using Taskify.Modules.ToDo.ViewModels;
 
-namespace Taskify.Modules.ToDo
+namespace Taskify.Modules.ToDo.Services
 {
     public class ToDoDataService
     {
@@ -12,7 +13,7 @@ namespace Taskify.Modules.ToDo
         private static readonly string FilePath = Path.Combine(FolderPath, "todos.json");
 
         // Speichert die Notizen als JSON in LocalAppData
-        public static void SaveToDos(ObservableCollection<TaskItem> todos)
+        public static void SaveTaskItems(ObservableCollection<TaskItem> todos)
         {
             try
             {
@@ -28,6 +29,19 @@ namespace Taskify.Modules.ToDo
             {
                 Console.WriteLine($"Fehler beim Speichern: {ex.Message}");
             }
+        }
+
+
+        public static ObservableCollection<TaskItem> ConvertListOfTaskItemVmsToTaskItems(ObservableCollection<TaskItemViewModel> taskItemVMs)
+        {
+            ObservableCollection<TaskItem> tasks = new ObservableCollection<TaskItem>();
+
+            foreach (TaskItemViewModel taskVM in taskItemVMs)
+            {
+                tasks.Add(taskVM.Task);
+            }
+
+            return tasks;
         }
 
         // Lädt die Notizen aus LocalAppData
