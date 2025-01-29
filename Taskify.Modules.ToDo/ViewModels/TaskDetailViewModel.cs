@@ -24,20 +24,25 @@ namespace Taskify.Modules.ToDo.ViewModels
 
         public event Action<IDialogResult> RequestClose;
 
-        public DelegateCommand<string> CloseDialogCommand { get; }
+        public DelegateCommand<TaskItemViewModel> CloseDialogCommand { get; }
 
         public TaskDetailViewModel()
         {
-            CloseDialogCommand = new DelegateCommand<string>(CloseDialog);
+            CloseDialogCommand = new DelegateCommand<TaskItemViewModel>(CloseDialog);
         }
 
-        private void CloseDialog(string parameter)
+        private void CloseDialog(object parameter)
         {
             var result = new DialogResult(ButtonResult.None);
-            if (bool.TryParse(parameter, out var isConfirmed) && isConfirmed)
-            {
-                result = new DialogResult(ButtonResult.OK, new DialogParameters { { "Task", parameter } });
-            }
+
+           
+            
+                result = new DialogResult(ButtonResult.OK, new DialogParameters
+                     {
+                         { "Task", Task } // Hier kannst du Werte zurückgeben
+                     });
+            
+
             RequestClose?.Invoke(result);
         }
 

@@ -24,11 +24,11 @@ namespace Taskify.Modules.ToDo
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterDialogWindow<CustomDialogWindow>();
+
             containerRegistry.RegisterForNavigation<TaskListView, TaskListViewModel>();
             containerRegistry.RegisterForNavigation<TaskItemView, TaskItemViewModel>();
             containerRegistry.RegisterDialog<TaskDetailView, TaskDetailViewModel>();
-
-            containerRegistry.RegisterDialogWindow<CustomDialogWindow>();
         }
     }
 }
