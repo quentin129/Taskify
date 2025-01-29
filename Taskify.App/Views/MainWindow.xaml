@@ -20,6 +20,7 @@
         </Grid.RowDefinitions>
 
         <Border Background="#16423C"
+                PreviewMouseLeftButtonDown="Border_PreviewMouseLeftButtonDown"
                 Grid.ColumnSpan="2">
             <Label Content="// Taskify"
                    FontWeight="Bold"

@@ -24,5 +24,14 @@ namespace Taskify.App.Views
             };
             WindowChrome.SetWindowChrome(this, windowChrome);
         }
+
+        private void Border_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (WindowState == WindowState.Maximized)
+            {
+                WindowState = WindowState.Normal;
+            }
+            this.DragMove();
+        }
     }
 }
