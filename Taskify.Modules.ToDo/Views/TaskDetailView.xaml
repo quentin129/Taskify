@@ -6,25 +6,42 @@
              xmlns:local="clr-namespace:Taskify.Modules.ToDo.Views"
              xmlns:prism="http://prismlibrary.com/"
              mc:Ignorable="d"
-             d:DesignHeight="450"
-             d:DesignWidth="800">
-    <Grid PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
+             Height="600"
+             Width="600"
+             BorderBrush="Black"
+             BorderThickness="2">
+    <UserControl.Effect>
+        <DropShadowEffect Color="Black"
+                          BlurRadius="10"
+                          ShadowDepth="5"
+                          Opacity="0.5" />
+    </UserControl.Effect>
+
+    <Grid Background="#C4DAD2">
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
+            <RowDefinition Height="25"
+                           PreviewMouseLeftButtonDown="RowDefinition_PreviewMouseLeftButtonDown" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"
                     Panel.ZIndex="1"
-                    Margin="0 2 3 0"
+                    Margin="0 5 5 0"
                     HorizontalAlignment="Right">
             <Button Content="X"
+                    Margin="0 0 5 0"
+                    Style="{StaticResource PinWindowButton}"
+                    Command="{Binding }" />
+            <Button Content="X"
                     Style="{StaticResource CloseWindowButton}"
-                    Command="{Binding CloseDialogCommand}"/>
+                    Command="{Binding CloseDialogCommand}" />
         </StackPanel>
 
-        <TextBlock Background="Beige"
-                   Grid.Row="0"
-                   Grid.RowSpan="2"
-                   Text="{Binding Task.Title}" />
+        <GroupBox Grid.Row="1"
+                  Margin="75 0"
+                  Header="Title">
+            <TextBox Text="{Binding Task.Title}"
+                     VerticalContentAlignment="Center" />
+        </GroupBox>
     </Grid>
 </UserControl>

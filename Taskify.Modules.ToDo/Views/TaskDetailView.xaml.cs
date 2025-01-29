@@ -25,7 +25,7 @@ namespace Taskify.Modules.ToDo.Views
             InitializeComponent();
         }
 
-        private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void RowDefinition_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             var window = Window.GetWindow(this);
             if (window != null)
