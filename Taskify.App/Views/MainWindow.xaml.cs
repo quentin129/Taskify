@@ -12,6 +12,7 @@ namespace Taskify.App.Views
         {
             InitializeComponent();
             InitializeWindowChrome();
+            ResizeToPrimaryScreenWidth();
         }
 
         private void InitializeWindowChrome()
@@ -23,6 +24,12 @@ namespace Taskify.App.Views
                 NonClientFrameEdges = NonClientFrameEdges.None
             };
             WindowChrome.SetWindowChrome(this, windowChrome);
+        }
+
+        private void ResizeToPrimaryScreenWidth()
+        {
+            this.Width = SystemParameters.PrimaryScreenWidth * 0.75;
+            this.Height = SystemParameters.PrimaryScreenHeight * 0.75;
         }
 
         private void Border_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

@@ -5,9 +5,9 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         AllowsTransparency="True"
         Background="#E9EFEC"
-        Height="1080"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
+        Height="1080"
         Width="1920">
     <Grid>
         <Grid.ColumnDefinitions>
