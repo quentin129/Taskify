@@ -136,6 +136,37 @@
             </Setter.Value>
         </Setter>
     </Style>
+   
+    <Style TargetType="Button"
+           x:Key="PinWindowButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Viewbox>
+                        <Border x:Name="_border"
+                                Margin="0 10"
+                                Background="Transparent">
+                            <Path Data="M 184.2625 13.7375 A 9.375 9.375 180 0 0 177.625 11 H 46.375 A 9.375 9.375 180 0 0 37 20.375 C 37 33.125 43.4125 42.3875 49.1125 48.1062 C 51.475 50.45 53.8 52.3062 55.75 53.6938 V 136.775 L 54.2875 137.675 C 50.4812 140.0563 45.3625 143.5625 40.2062 148.0813 C 30.25 156.7813 18.25 170.8813 18.25 189.125 A 9.375 9.375 180 0 0 27.625 198.5 H 102.625 V 282.875 C 102.625 288.05 106.825 311 112 311 S 121.375 288.05 121.375 282.875 V 198.5 H 196.375 A 9.375 9.375 180 0 0 205.75 189.125 C 205.75 170.8812 193.75 156.7813 183.8125 148.0813 A 112.5 112.5 180 0 0 168.25 136.775 V 53.6938 A 56.25 56.25 180 0 0 174.8875 48.1062 C 180.5875 42.3875 187 33.1062 187 20.375 A 9.375 9.375 180 0 0 184.2625 13.7375 M 154.6375 40.1375 L 154.675 40.1187 z M 154.675 40.1187 L 154.6375 40.1375 A 9.375 9.375 180 0 0 149.5 48.5 V 142.25 A 9.375 9.375 180 0 0 154.675 150.6312 H 154.7125 L 154.9375 150.7625 L 155.95 151.325 A 93.75 93.75 180 0 1 171.4562 162.2 C 177.4187 167.4125 182.425 173.375 185.05 179.75 H 38.95 C 41.575 173.375 46.5812 167.4125 52.5437 162.2 A 93.75 93.75 180 0 1 69.0625 150.7625 L 69.2875 150.65 H 69.325 A 9.375 9.375 180 0 0 74.5 142.25 V 48.5 A 9.375 9.375 180 0 0 68.9688 39.9125 A 33.75 33.75 180 0 1 62.3875 34.8313 C 60.8875 33.3313 59.4812 31.6438 58.375 29.75 H 165.625 Q 163.9187 32.5625 161.6125 34.8313 A 33.75 33.75 180 0 1 154.675 40.1187"
+                                  Fill="{TemplateBinding Foreground}"
+                                  HorizontalAlignment="Center"
+                                  Name="_path"
+                                  VerticalAlignment="Center" />
+                        </Border>
+                    </Viewbox>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="_border"
+                                 Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="_path"
+                                    Property="Fill"
+                                    Value="#6A9C89" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <Style TargetType="ContextMenu">
         <Setter Property="Template">
