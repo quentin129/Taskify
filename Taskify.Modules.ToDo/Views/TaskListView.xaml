@@ -25,7 +25,7 @@
                 VerticalAlignment="Top"
                 Command="{Binding AddTaskCommand}"
                 Content="AddTask" />
-        <ListBox ItemsSource="{Binding TaskItems}"
+        <ListBox ItemsSource="{Binding TaskItemViewModels}"
                  BorderThickness="0"
                  Margin="55"
                  Background="Transparent"

@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:Taskify.Modules.ToDo"
         mc:Ignorable="d"
         ShowInTaskbar="False"
-        Topmost="True"
+        SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
+        AllowsTransparency="True"
         WindowStyle="None"
-        Title="CustomDialogWindow" Height="450" Width="800">
+        Title="CustomDialogWindow">
     <Grid>
-        
+        <!--Just a simple dialog window without style as template for Prism DialogService-->
     </Grid>
 </Window>

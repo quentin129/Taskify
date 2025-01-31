@@ -7,6 +7,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Windows;
 using Taskify.Modules.ToDo.Models;
+using Taskify.Modules.ToDo.Services;
 
 namespace Taskify.Modules.ToDo.ViewModels
 {
@@ -15,11 +16,11 @@ namespace Taskify.Modules.ToDo.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IDialogService _dialogService;
         private Random Random = new Random();
-        private ObservableCollection<TaskItemViewModel> _taskItems;
-        public ObservableCollection<TaskItemViewModel> TaskItems
+        private ObservableCollection<TaskItemViewModel> _taskItemViewModels;
+        public ObservableCollection<TaskItemViewModel> TaskItemViewModels
         {
-            get => _taskItems;
-            set => SetProperty(ref _taskItems, value);
+            get => _taskItemViewModels;
+            set => SetProperty(ref _taskItemViewModels, value);
         }
 
         private DelegateCommand _addTaskCommand;
@@ -31,29 +32,72 @@ namespace Taskify.Modules.ToDo.ViewModels
             _eventAggregator = eventAggregator;
             _dialogService = dialogService;
             _eventAggregator.GetEvent<TaskDeletedEvent>().Subscribe(OnTaskDeleted);
+            _eventAggregator.GetEvent<ShellClosedEvent>().Subscribe(OnShellClosed);
+            _eventAggregator.GetEvent<SaveEvent>().Subscribe(OnSave);
 
             _addTaskCommand = new DelegateCommand(AddTask);
 
+            TaskItemViewModels = new ObservableCollection<TaskItemViewModel>();
 
-            TaskItems = new ObservableCollection<TaskItemViewModel>
-            {
-                new TaskItemViewModel(new TaskItem { Title = "Aufgabe 1", Description = "Beschreibung 1", Priority = Priority.High, Deadline = DateTime.Now.AddDays(3)}, _eventAggregator, _dialogService),
-                new TaskItemViewModel(new TaskItem { Title = "Aufgabe 2", Description = "Beschreibung 2", Priority = Priority.Medium, Deadline = DateTime.Now.AddDays(1)}, _eventAggregator, _dialogService),
-                new TaskItemViewModel(new TaskItem { Title = "Aufgabe 3", Description = "Beschreibung 3", Priority = Priority.Low, Deadline = DateTime.Now.AddDays(5)}, _eventAggregator, _dialogService)
-            };
+            LoadToDoVMs();
+
+            //{
+            //    new TaskItemViewModel(new TaskItem { Title = "Aufgabe 1", Description = "Beschreibung 1", Priority = Priority.High, Deadline = DateTime.Now.AddDays(3)}, _eventAggregator, _dialogService),
+            //    new TaskItemViewModel(new TaskItem { Title = "Aufgabe 2", Description = "Beschreibung 2", Priority = Priority.Medium, Deadline = DateTime.Now.AddDays(1)}, _eventAggregator, _dialogService),
+            //    new TaskItemViewModel(new TaskItem { Title = "Aufgabe 3", Description = "Beschreibung 3", Priority = Priority.Low, Deadline = DateTime.Now.AddDays(5)}, _eventAggregator, _dialogService)
+            //};
         }
 
         private void AddTask()
         {
-            TaskItems.Add(new TaskItemViewModel(new TaskItem { Title = "Test", Description = "Beschreibung 1", Priority = (Priority)new Random().Next(0, 3), Deadline = DateTime.Now.AddDays(3) }, _eventAggregator, _dialogService));
+            TaskItemViewModels.Add(new TaskItemViewModel(new TaskItem { Title = "Test", Description = "Beschreibung 1", Priority = (Priority)new Random().Next(0, 3), Deadline = DateTime.Now.AddDays(3) }, _eventAggregator, _dialogService));
+
+            ObservableCollection<TaskItem> tasks = new ObservableCollection<TaskItem>();
+            foreach (TaskItemViewModel taskVM in TaskItemViewModels)
+            {
+                tasks.Add(taskVM.Task);
+            }
+
+            tasks = ToDoDataService.ConvertListOfTaskItemVmsToTaskItems(TaskItemViewModels);
+
+            ToDoDataService.SaveTaskItems(tasks);
+        }
+
+        private void LoadToDoVMs()
+        {
+            ObservableCollection<TaskItem> tasks = ToDoDataService.LoadToDos();
+
+            foreach (TaskItem task in tasks)
+            {
+                TaskItemViewModels.Add(new TaskItemViewModel(task, _eventAggregator, _dialogService));
+            }
         }
 
         private void OnTaskDeleted(TaskItemViewModel taskItemViewModel)
         {
-            TaskItems.Remove(taskItemViewModel);
+            TaskItemViewModels.Remove(taskItemViewModel);
         }
+
+        private void OnShellClosed()
+        {
+            ObservableCollection<TaskItem> tasks = new ObservableCollection<TaskItem>();
+            tasks = ToDoDataService.ConvertListOfTaskItemVmsToTaskItems(TaskItemViewModels);
+            ToDoDataService.SaveTaskItems(tasks);
+        }
+
+        private void OnSave()
+        {
+            ObservableCollection<TaskItem> tasks = new ObservableCollection<TaskItem>();
+            tasks = ToDoDataService.ConvertListOfTaskItemVmsToTaskItems(TaskItemViewModels);
+            ToDoDataService.SaveTaskItems(tasks);
+        }
+
+        
 
         #region DragDrop
         #endregion
     }
+
+    public class ShellClosedEvent : PubSubEvent { }
+    public class SaveEvent : PubSubEvent { }
 }

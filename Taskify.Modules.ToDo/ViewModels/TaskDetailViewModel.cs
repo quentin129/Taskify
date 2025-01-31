@@ -20,7 +20,12 @@ namespace Taskify.Modules.ToDo.ViewModels
             set => SetProperty(ref _task, value);
         }
 
-        public string Title => "Task Detail";
+        private string _title;
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value, nameof(Title));
+        }
 
         public event Action<IDialogResult> RequestClose;
 
@@ -53,6 +58,7 @@ namespace Taskify.Modules.ToDo.ViewModels
         public void OnDialogOpened(IDialogParameters parameters)
         {
             Task = parameters.GetValue<TaskItemViewModel>("Task");
+            Title = Task.Title;
         }
     }
 }

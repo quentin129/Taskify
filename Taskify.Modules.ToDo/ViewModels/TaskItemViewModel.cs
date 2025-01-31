@@ -113,8 +113,8 @@ namespace Taskify.Modules.ToDo.ViewModels
                 {
                     if (result.Result == ButtonResult.OK)
                     {
-                        string userInput = result.Parameters.GetValue<string>("UserInput");
                         // Bearbeite das Ergebnis
+                        //string userInput = result.Parameters.GetValue<string>("Task");
                     }
                 });
             }
