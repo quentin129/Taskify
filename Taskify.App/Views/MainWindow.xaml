@@ -54,6 +54,7 @@
                     Margin="25 40 0 0"
                     Command="{Binding NavigateCommand}"
                     CommandParameter="TaskListView"
+                    Tag="ToDo"
                     Style="{StaticResource NavBarButton}" />
             <Button Content="Today"
                     Command="{Binding NavigateCommand}"
@@ -66,6 +67,7 @@
             <Button Content="Notes"
                     Command="{Binding NavigateCommand}"
                     CommandParameter="TaskItemView"
+                    Tag="Notes"
                     Style="{StaticResource NavBarButton}" />
         </StackPanel>
 

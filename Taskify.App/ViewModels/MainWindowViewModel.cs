@@ -2,8 +2,6 @@
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
-using System;
-using Taskify.Modules.ToDo;
 using Taskify.Modules.ToDo.ViewModels;
 using Taskify.Modules.ToDo.Views;
 
