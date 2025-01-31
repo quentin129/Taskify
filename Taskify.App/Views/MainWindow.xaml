@@ -52,21 +52,21 @@
                     Grid.Row="1">
             <Button Content="ToDo"
                     Margin="25 40 0 0"
-                    Command="{Binding ChangePageCommand}"
-                    CommandParameter="{Binding }"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="TaskListView"
                     Style="{StaticResource NavBarButton}" />
             <Button Content="Today"
-                    Style="{StaticResource NavBarButton}"
-                    Command="{Binding ChangePageCommand}"
-                    CommandParameter="{Binding }" />
-            <Button Content="Projects"
-                    Style="{StaticResource NavBarButton}"
                     Command="{Binding NavigateCommand}"
-                    CommandParameter="TestView" />
+                    CommandParameter=""
+                    Style="{StaticResource NavBarButton}" />
+            <Button Content="Projects"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter=""
+                    Style="{StaticResource NavBarButton}" />
             <Button Content="Notes"
-                    Style="{StaticResource NavBarButton}"
-                    Command="{Binding ChangePageCommand}"
-                    CommandParameter="{Binding }" />
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="TaskItemView"
+                    Style="{StaticResource NavBarButton}" />
         </StackPanel>
 
         <Border Background="#bcbcbc"

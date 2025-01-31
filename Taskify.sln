@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskify.Modules.ToDo", "Tas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskify.App", "Taskify.App\Taskify.App.csproj", "{335BB099-4D9B-4F08-8195-F61A45E5AD38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taskify.Modules.Notes", "Taskify.Modules.Notes\Taskify.Modules.Notes.csproj", "{C3EA0357-CDFA-4523-BD34-9BF3E0DA9E48}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +25,16 @@ Global
 		{335BB099-4D9B-4F08-8195-F61A45E5AD38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{335BB099-4D9B-4F08-8195-F61A45E5AD38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{335BB099-4D9B-4F08-8195-F61A45E5AD38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3EA0357-CDFA-4523-BD34-9BF3E0DA9E48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3EA0357-CDFA-4523-BD34-9BF3E0DA9E48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3EA0357-CDFA-4523-BD34-9BF3E0DA9E48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3EA0357-CDFA-4523-BD34-9BF3E0DA9E48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{69BD3FD1-EEC2-4525-9855-F63F51B329E4} = {90D73450-5A2C-4DFE-B7E5-52B353645E58}
+		{C3EA0357-CDFA-4523-BD34-9BF3E0DA9E48} = {90D73450-5A2C-4DFE-B7E5-52B353645E58}
 	EndGlobalSection
 EndGlobal
