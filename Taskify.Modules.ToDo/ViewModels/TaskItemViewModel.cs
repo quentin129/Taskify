@@ -82,6 +82,13 @@ namespace Taskify.Modules.ToDo.ViewModels
             }
         }
 
+        private bool _isEditing;
+        public bool IsEditing
+        {
+            get => _isEditing;
+            set => SetProperty(ref _isEditing, value);
+        }
+
         private DelegateCommand _deleteTaskCommand;
         public DelegateCommand DeleteTaskCommand =>
             _deleteTaskCommand ??= new DelegateCommand(DeleteTask);
@@ -89,6 +96,9 @@ namespace Taskify.Modules.ToDo.ViewModels
         private DelegateCommand<TaskItemViewModel> _openDetailsCommand;
         public DelegateCommand<TaskItemViewModel> OpenDetailsCommand =>
             _openDetailsCommand ??= new DelegateCommand<TaskItemViewModel>(OpenDetailView);
+
+        public DelegateCommand StartEditingCommand { get; set; }
+        public DelegateCommand StopEditingCommand { get; set; }
         #endregion
 
         public TaskItemViewModel(TaskItem task, IEventAggregator eventAggregator, IDialogService dialogService)
@@ -96,6 +106,14 @@ namespace Taskify.Modules.ToDo.ViewModels
             _dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService)); ;
             _eventAggregator = eventAggregator ?? throw new ArgumentNullException(nameof(eventAggregator)); ;
             Task = task ?? throw new ArgumentNullException(nameof(task));
+
+            InitializeCommands(); 
+        }
+
+        private void InitializeCommands()
+        {
+            StartEditingCommand = new DelegateCommand(() => IsEditing = true);
+            StopEditingCommand = new DelegateCommand(() => IsEditing = false);
         }
 
         public void DeleteTask()

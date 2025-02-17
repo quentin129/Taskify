@@ -6,6 +6,8 @@ using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Media.Animation;
+using System.Windows.Media;
 using Taskify.Modules.ToDo.Models;
 using Taskify.Modules.ToDo.Services;
 
@@ -92,9 +94,11 @@ namespace Taskify.Modules.ToDo.ViewModels
             ToDoDataService.SaveTaskItems(tasks);
         }
 
-        
+
 
         #region DragDrop
+        
+
         #endregion
     }
 

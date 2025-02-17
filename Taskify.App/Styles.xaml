@@ -19,7 +19,7 @@
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <TextBlock x:Name="HoverText"
-                                   Text="// "
+                                   Text=""
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Margin="0,0,0,0"

@@ -80,7 +80,6 @@
                        x:Name="tbTitle"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Left">
-                
                 <TextBlock.Style>
                     <Style TargetType="TextBlock">
                         <Style.Triggers>

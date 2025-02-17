@@ -10,29 +10,27 @@ namespace Taskify.App.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         #region Properties
-        private IEventAggregator _eventAggregator;
-        private IRegionManager _regionManager;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly IRegionManager _regionManager;
 
-        private string _currentView;
-        public string CurrentView
+        private string _selectedViewModel;
+        public string SelectedViewModel
         {
-            get { return _currentView; }
-            set { SetProperty(ref _currentView, value, nameof(CurrentView)); }
+            get => _selectedViewModel;
+            set
+            {
+                if (SetProperty(ref _selectedViewModel, value))
+                {
+                    _regionManager.RequestNavigate("ContentRegion", value);
+                }
+            }
         }
         #endregion
 
         #region Commands
-        private DelegateCommand<string> _navigateCommand;
-        public DelegateCommand<string> NavigateCommand =>
-            _navigateCommand ??= new DelegateCommand<string>(Navigate);
-
-        private DelegateCommand _windowClosingCommand;
-        public DelegateCommand WindowClosingCommand =>
-            _windowClosingCommand ??= new DelegateCommand(OnWindowClosing);
-
-        private DelegateCommand _saveCommand;
-        public DelegateCommand SaveCommand =>
-            _saveCommand ??= new DelegateCommand(SaveShell);
+        public DelegateCommand<string> NavigateCommand { get; }
+        public DelegateCommand WindowClosingCommand { get; }
+        public DelegateCommand SaveCommand { get; }
         #endregion
 
         #region Konstruktor
@@ -40,26 +38,23 @@ namespace Taskify.App.ViewModels
         {
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
-            Navigate(nameof(TaskListView));
+
+            NavigateCommand = new DelegateCommand<string>(view => SelectedViewModel = view);
+            WindowClosingCommand = new DelegateCommand(OnWindowClosing);
+            SaveCommand = new DelegateCommand(SaveShell);
+
+            SelectedViewModel = nameof(TaskListView); // Standard-View setzen
         }
         #endregion
 
         #region Funktionen
-        private void Navigate(string viewName)
-        {
-            _regionManager.RequestNavigate("ContentRegion", viewName);
-            CurrentView = viewName;
-        }
-
         private void OnWindowClosing()
         {
-            // Publish Event um im TaskListViewModel das speichern anzustoßen
             _eventAggregator.GetEvent<ShellClosedEvent>().Publish();
         }
 
         private void SaveShell()
         {
-            // Publish Events Content zu saven
             _eventAggregator.GetEvent<SaveEvent>().Publish();
         }
         #endregion
