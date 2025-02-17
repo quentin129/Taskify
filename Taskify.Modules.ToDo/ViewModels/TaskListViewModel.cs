@@ -10,6 +10,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media;
 using Taskify.Modules.ToDo.Models;
 using Taskify.Modules.ToDo.Services;
+using System.Windows.Input;
 
 namespace Taskify.Modules.ToDo.ViewModels
 {
@@ -25,6 +26,24 @@ namespace Taskify.Modules.ToDo.ViewModels
             set => SetProperty(ref _taskItemViewModels, value);
         }
 
+        private TaskItemViewModel _selectedTask;
+        public TaskItemViewModel SelectedTask
+        {
+            get { return _selectedTask; }
+            set { SetProperty(ref _selectedTask, value); }
+        }
+
+        private bool _isTaskSelected;
+        public bool IsTaskSelected
+        {
+            get { return _isTaskSelected; }
+            set { SetProperty(ref _isTaskSelected, value); }
+        }
+
+        private DelegateCommand<TaskItemViewModel> _taskSelectedCommand;
+        public DelegateCommand<TaskItemViewModel> TaskSelectedCommand =>
+            _taskSelectedCommand ??= new DelegateCommand<TaskItemViewModel>(OnTaskSelected);
+
         private DelegateCommand _addTaskCommand;
         public DelegateCommand AddTaskCommand =>
             _addTaskCommand ??= new DelegateCommand(AddTask);
@@ -38,6 +57,7 @@ namespace Taskify.Modules.ToDo.ViewModels
             _eventAggregator.GetEvent<SaveEvent>().Subscribe(OnSave);
 
             _addTaskCommand = new DelegateCommand(AddTask);
+            _taskSelectedCommand = new DelegateCommand<TaskItemViewModel>(OnTaskSelected);
 
             TaskItemViewModels = new ObservableCollection<TaskItemViewModel>();
 
@@ -79,6 +99,11 @@ namespace Taskify.Modules.ToDo.ViewModels
         {
             TaskItemViewModels.Remove(taskItemViewModel);
         }
+        private void OnTaskSelected(TaskItemViewModel selectedTask)
+        {
+            SelectedTask = selectedTask;
+            IsTaskSelected = selectedTask != null;  // Wenn eine Aufgabe ausgewählt ist, setze IsTaskSelected auf true
+        }
 
         private void OnShellClosed()
         {
@@ -97,7 +122,7 @@ namespace Taskify.Modules.ToDo.ViewModels
 
 
         #region DragDrop
-        
+
 
         #endregion
     }

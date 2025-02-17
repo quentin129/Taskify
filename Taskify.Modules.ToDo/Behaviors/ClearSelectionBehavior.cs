@@ -1,89 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xaml.Behaviors;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows;
 
 namespace Taskify.Modules.ToDo.Behaviors
 {
-    public static class ClearSelectionBehavior
+    public class ClearSelectionBehavior : Behavior<ListBox>
     {
-        public static bool GetClearSelectionOnClickOutside(DependencyObject obj)
+        protected override void OnAttached()
         {
-            return (bool)obj.GetValue(ClearSelectionOnClickOutsideProperty);
+            AssociatedObject.PreviewMouseDown += AssociatedObject_PreviewMouseDown;
         }
 
-        public static void SetClearSelectionOnClickOutside(DependencyObject obj, bool value)
+        protected override void OnDetaching()
         {
-            obj.SetValue(ClearSelectionOnClickOutsideProperty, value);
+            AssociatedObject.PreviewMouseDown -= AssociatedObject_PreviewMouseDown;
         }
 
-        public static readonly DependencyProperty ClearSelectionOnClickOutsideProperty =
-            DependencyProperty.RegisterAttached(
-                "ClearSelectionOnClickOutside",
-                typeof(bool),
-                typeof(ClearSelectionBehavior),
-                new PropertyMetadata(false, OnClearSelectionOnClickOutsideChanged));
-
-        private static void OnClearSelectionOnClickOutsideChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private void AssociatedObject_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (d is ListBox listBox)
+            if (e.OriginalSource is DependencyObject sourceElement)
             {
-                if ((bool)e.NewValue)
+                var listBox = AssociatedObject;
+                var dockPanel = listBox?.FindName("TaskDetailsDockPanel") as DockPanel;
+
+                // Falls das DockPanel existiert und der Klick darin passiert, dann KEIN ClearSelection
+                if (dockPanel != null && dockPanel.IsAncestorOf(sourceElement))
                 {
-                    listBox.Loaded += OnListBoxLoaded;
-                }
-                else
-                {
-                    listBox.Loaded -= OnListBoxLoaded;
+                    return; // Nichts tun -> Selektion bleibt bestehen
                 }
             }
-        }
 
-        private static void OnListBoxLoaded(object sender, RoutedEventArgs e)
-        {
-            if (sender is ListBox listBox)
-            {
-                var window = Window.GetWindow(listBox);
-                if (window != null)
-                {
-                    window.PreviewMouseDown += (s, args) => OnPreviewMouseDown(listBox, args);
-                }
-            }
-        }
-
-
-        private static void OnPreviewMouseDown(ListBox listBox, MouseButtonEventArgs e)
-        {
-            if (e.OriginalSource is Visual visual && FindVisualParent<ListBoxItem>(visual, out _))
-            {
-                // Click was on a ListBoxItem, do nothing
-                return;
-            }
-
-            // Click was outside ListBox, clear the selection
-            listBox.SelectedItem = null;
-        }
-
-        private static bool FindVisualParent<T>(DependencyObject obj, out T parent) where T : DependencyObject
-        {
-            parent = null;
-            while (obj != null && obj is not T)
-            {
-                obj = VisualTreeHelper.GetParent(obj);
-            }
-
-            if (obj is T typedParent)
-            {
-                parent = typedParent;
-                return true;
-            }
-
-            return false;
+            // Auswahl löschen, falls außerhalb geklickt wurde
+            AssociatedObject.SelectedItem = null;
         }
     }
 }

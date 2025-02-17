@@ -24,5 +24,10 @@ namespace Taskify.Modules.ToDo.Views
         {
             InitializeComponent();
         }
+
+        private void TaskList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

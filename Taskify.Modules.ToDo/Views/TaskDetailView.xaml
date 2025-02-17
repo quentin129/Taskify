@@ -21,7 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25"
                            PreviewMouseLeftButtonDown="RowDefinition_PreviewMouseLeftButtonDown" />
-            <RowDefinition Height="50" />
+            <!--<RowDefinition Height="50" />-->
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"
@@ -37,11 +37,17 @@
                     Command="{Binding CloseDialogCommand}" />
         </StackPanel>
 
-        <GroupBox Grid.Row="1"
-                  Margin="75 0"
-                  Header="Title">
-            <TextBox Text="{Binding Task.Title}"
-                     VerticalContentAlignment="Center" />
-        </GroupBox>
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
+                    Margin="75 0">
+            <GroupBox Header="Title">
+                <TextBox Text="{Binding Task.Title}"
+                         VerticalContentAlignment="Center" />
+            </GroupBox>
+            <GroupBox Header="Description">
+                <TextBox Text="{Binding Task.Title}"
+                         VerticalContentAlignment="Center" />
+            </GroupBox>
+        </StackPanel>
     </Grid>
 </UserControl>

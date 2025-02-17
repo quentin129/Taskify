@@ -6,6 +6,7 @@
              xmlns:behaviors="clr-namespace:Taskify.Modules.ToDo.Behaviors"
              xmlns:local="clr-namespace:Taskify.Modules.ToDo.Views"
              xmlns:helper="clr-namespace:Taskify.Modules.ToDo.Helper"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:dd="urn:gong-wpf-dragdrop"
              prism:ViewModelLocator.AutoWireViewModel="True"
@@ -14,30 +15,43 @@
              d:DesignWidth="800">
     <UserControl.Resources>
         <helper:VerticalOnlyDragDropHandler x:Key="VerticalOnlyDragDropHandler" />
+        <helper:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <helper:BooleanToGridLengthConverter x:Key="BooleanToGridLengthConverter" />
         <DataTemplate x:Key="TaskItemTemplate">
             <local:TaskItemView />
         </DataTemplate>
     </UserControl.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="{Binding IsTaskSelected, Converter={StaticResource BooleanToGridLengthConverter}}" />
+        </Grid.ColumnDefinitions>
+
         <TextBlock Text="Task List"
                    FontWeight="Bold"
-                   FontSize="16" />
-        <Button x:Name="btnAddTask" Height="20"
-                Panel.ZIndex="4"
-                VerticalAlignment="Top"
-                Command="{Binding AddTaskCommand}"
-                Content="AddTask" />
+                   Margin="15"
+                   FontSize="26" />
         <ListBox ItemsSource="{Binding TaskItemViewModels}"
                  BorderThickness="0"
                  Margin="55"
                  Background="Transparent"
-                 dd:DragDrop.IsDragSource="True"
                  dd:DragDrop.IsDropTarget="True"
+                 dd:DragDrop.IsDragSource="True"
                  dd:DragDrop.UseDefaultDragAdorner="True"
-                 behaviors:ClearSelectionBehavior.ClearSelectionOnClickOutside="True"
+                 dd:DragDrop.DragDirectlySelectedOnly="True"
                  HorizontalContentAlignment="Stretch"
                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                 SelectedItem="{Binding SelectedTask}"
                  ItemTemplate="{StaticResource TaskItemTemplate}">
+            <i:Interaction.Behaviors>
+                <behaviors:ClearSelectionBehavior />
+            </i:Interaction.Behaviors>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding TaskSelectedCommand}"
+                                           CommandParameter="{Binding SelectedTask}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Template">
@@ -98,5 +112,52 @@
                 </Style>
             </ListBox.ItemContainerStyle>
         </ListBox>
+
+        <DockPanel Grid.Column="1"
+                   Background="#e9efec"
+                   x:Name="TaskDetailsDockPanel"
+                   Visibility="{Binding IsTaskSelected, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border BorderThickness="1"
+                    SnapsToDevicePixels="False"
+                    BorderBrush="#b7bcb9">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Task Details"
+                               Grid.Row="0"
+                               Grid.ColumnSpan="2"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               Margin="10" />
+                    <StackPanel Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Orientation="Horizontal">
+                        <CheckBox Style="{StaticResource ToDoItemCheckBoxStyle}"
+                                  Width="20"
+                                  Margin="10 2 10 0"
+                                  VerticalAlignment="Top"
+                                  Height="20" />
+                        <TextBlock VerticalAlignment="Top"
+                                   Text="{Binding SelectedTask.Title}"
+                                   FontSize="16" />
+                    </StackPanel>
+
+                    <TextBlock Grid.Row="2"
+                               Margin="10 25 0 0"
+                               Grid.ColumnSpan="2"
+                               Text="{Binding SelectedTask.Description}"
+                               VerticalAlignment="Top" />
+                </Grid>
+            </Border>
+        </DockPanel>
+
+
     </Grid>
 </UserControl>
